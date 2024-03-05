@@ -58,7 +58,11 @@ const Login = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <Form
         name="login-form"
-        initialValues={{ remember: true }}
+        initialValues={{
+          remember: false,
+          username: localStorage.getItem("identifier") ?? "",
+          password: localStorage.getItem("password") ?? "",
+        }}
         onFinish={onFinish}
         className="auth-form"
       >
@@ -78,7 +82,6 @@ const Login = () => {
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Username or Email"
             className="auth-input"
-            defaultValue={localStorage.getItem("identifier") ?? ""}
           />
         </Form.Item>
         <Form.Item
@@ -91,7 +94,6 @@ const Login = () => {
             prefix={<LockOutlined className="site-form-item-icon" />}
             placeholder="Password"
             className="auth-input"
-            defaultValue={localStorage.getItem("password") ?? ""}
           />
         </Form.Item>
         <Form.Item>
