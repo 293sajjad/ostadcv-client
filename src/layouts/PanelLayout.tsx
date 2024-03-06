@@ -1,8 +1,10 @@
 import axios from "axios";
-import { FC, ReactNode } from "react";
+import { useAtom } from "jotai";
+import { FC, ReactNode, useEffect, useState } from "react";
 import { Cookies } from "react-cookie";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
+import { authInfo } from "../utils/store";
 
 interface Props {
   children: ReactNode;
@@ -11,36 +13,45 @@ interface Props {
 }
 
 const Panel: FC<Props> = ({ children, title, description }) => {
-  // eslint-disable-next-line prefer-const
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [state, setState] = useAtom(authInfo);
   const cookie = new Cookies();
 
-  axios
-    .get(import.meta.env.VITE_API_URL + "/api/users/me", {
-      headers: {
-        Authorization: `Bearer ${cookie.get("token")}`,
-      },
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log("error", error);
+  useEffect(() => {
+    axios
+      .get(import.meta.env.VITE_API_URL + "/api/users/me", {
+        headers: {
+          Authorization: `Bearer ${cookie.get("token")}`,
+        },
+      })
+      .then((response) => {
+        setState({ singin: true, authInfo: response.data });
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("error", error);
+        console.error("Error fetching user:", error);
+        cookie.remove("token");
+        navigate("/auth/login");
+      });
+  }, []); // Run only once when component mounts
 
-      console.error("Error fetching user:", error);
-      cookie.remove("token");
-      navigate("/auth/login");
-    });
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title> ostadcv Panel | {title}</title>
-          <meta name="description" content={description} />
-        </Helmet>
-        {children}
-      </HelmetProvider>
+      {loading ? (
+        // Show loading indicator or any placeholder until data is fetched
+        <div>Loading...</div>
+      ) : (
+        <HelmetProvider>
+          <Helmet>
+            <title> ostadcv Panel | {title}</title>
+            <meta name="description" content={description} />
+          </Helmet>
+          {children}
+        </HelmetProvider>
+      )}
     </>
   );
 };

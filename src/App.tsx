@@ -3,7 +3,7 @@ import Home from "./pages/HomePage";
 import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import { LoginOrRegister, PanelAuth } from "./Guard/Auth";
-import { OverviewPanel } from "./pages/PanelPage";
+import { OverviewPanel, SettingPanel } from "./pages/PanelPage";
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         </Route>
         <Route path="/panel" element={<PanelAuth />}>
           <Route path="" Component={OverviewPanel} />
+          <Route path="setting" Component={SettingPanel} />
         </Route>
       </Routes>
     </>
