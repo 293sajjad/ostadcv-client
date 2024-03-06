@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import Auth from "../layouts/AuthLayout";
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import toast, { Toaster } from "react-hot-toast";
@@ -12,6 +12,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookie, setCookie] = useCookies(["token"]);
+  const navigate = useNavigate();
 
   const onFinish = (values: {
     username: string;
@@ -37,7 +38,8 @@ const Login = () => {
         }
         setTimeout(() => {
           setCookie("token", response.data.jwt);
-        }, 1400);
+          navigate("/panel");
+        }, 1200);
       })
       .catch((error) => {
         if (error.response.status == 400) {

@@ -1,15 +1,12 @@
-import { Cookies, useCookies } from "react-cookie";
+import { Cookies } from "react-cookie";
 import { Navigate, Outlet } from "react-router-dom";
-
+const cookie = new Cookies();
 export const LoginOrRegister = () => {
-  const [cookie] = useCookies(["token"]);
+  const token = cookie.get("token");
 
-  return !cookie.token ? <Outlet /> : <Navigate to={"/"} />;
+  return !token ? <Outlet /> : <Navigate to={"/"} />;
 };
 
 export const PanelAuth = () => {
-  const cookie = new Cookies();
-  console.log("step1", cookie.get("token"));
-
   return cookie.get("token") ? <Outlet /> : <Navigate to={"/auth/login"} />;
 };

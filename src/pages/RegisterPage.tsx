@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, Input, Button, Row, Col } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import Auth from "../layouts/AuthLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { strongPassValidation } from "../utils/test";
 import axios from "axios";
@@ -13,6 +13,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookie, setCookie] = useCookies(["token"]);
+  const navigate = useNavigate();
 
   const onFinish = (values: {
     username: string;
@@ -39,7 +40,8 @@ const Register = () => {
 
         setTimeout(() => {
           setCookie("token", response.data.jwt);
-        }, 1400);
+          navigate("/panel");
+        }, 1200);
       })
       .catch((error) => {
         if (error.response.status == 400) {
