@@ -11,7 +11,7 @@ import toast, { Toaster } from "react-hot-toast";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [cookie, setCookie] = useCookies(["token"]);
+  const [_cookie, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
   const onFinish = (values: {

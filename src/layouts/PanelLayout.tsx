@@ -1,27 +1,37 @@
-import axios from "axios";
-import { useAtom } from "jotai";
-import { FC, ReactNode, useEffect, useState } from "react";
-import { Cookies } from "react-cookie";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from "react";
+import { Spin, Layout } from "antd";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
+import { Cookies } from "react-cookie";
+import axios from "axios";
 import { authInfo } from "../utils/store";
+import { MenuItems } from "../components/Sidebar";
+import { LoadingScreen } from "../components/Load";
+
+const { Content, Sider } = Layout;
 
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
   title: string;
   description: string;
 }
 
-const Panel: FC<Props> = ({ children, title, description }) => {
+const Panel: React.FC<Props> = ({ children, title, description }) => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [state, setState] = useAtom(authInfo);
+  const [loading, setLoading] = React.useState(true);
+  const [_state, setState] = useAtom(authInfo);
   const cookie = new Cookies();
+  const [collapsed, setCollapsed] = React.useState(false);
 
-  useEffect(() => {
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+
+  React.useEffect(() => {
     axios
-      .get(import.meta.env.VITE_API_URL + "/api/users/me", {
+      .get(import.meta.env.VITE_API_URL + "/api/users/me?populate=avatar", {
         headers: {
           Authorization: `Bearer ${cookie.get("token")}`,
         },
@@ -39,20 +49,30 @@ const Panel: FC<Props> = ({ children, title, description }) => {
   }, []); // Run only once when component mounts
 
   return (
-    <>
-      {loading ? (
-        // Show loading indicator or any placeholder until data is fetched
-        <div>Loading...</div>
-      ) : (
-        <HelmetProvider>
-          <Helmet>
-            <title> ostadcv Panel | {title}</title>
-            <meta name="description" content={description} />
-          </Helmet>
-          {children}
-        </HelmetProvider>
-      )}
-    </>
+    <HelmetProvider>
+      <Helmet>
+        <title> ostadcv Panel | {title}</title>
+        <meta name="description" content={description} />
+      </Helmet>
+      <Layout style={{ minHeight: "100vh", direction: "rtl" }}>
+        <Sider collapsible collapsed={collapsed} onCollapse={toggleCollapsed}>
+          <div className="logo" />
+          <MenuItems />
+        </Sider>
+        <Layout className="site-layout">
+          <Content
+            className="site-layout-background"
+            style={{
+              margin: "24px 16px",
+              padding: 24,
+              minHeight: 280,
+            }}
+          >
+            {loading ? <LoadingScreen /> : children}
+          </Content>
+        </Layout>
+      </Layout>
+    </HelmetProvider>
   );
 };
 
