@@ -1,6 +1,6 @@
-import { Avatar, Card } from "antd";
+import { Avatar, Card, Button } from "antd";
 import { FC, useState } from "react";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, EditOutlined } from "@ant-design/icons";
 
 interface CardProps {
   id: number;
@@ -50,6 +50,11 @@ export const CardBox: FC<CardProps> = ({
     setIsHovered(false);
   };
 
+  const handleEdit = () => {
+    // Your edit logic goes here
+    console.log("Edit clicked!");
+  };
+
   return (
     <Card
       title="اطلاعات استاد"
@@ -62,6 +67,11 @@ export const CardBox: FC<CardProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={isHovered ? "hovered" : ""}
+      extra={
+        <Button type="text" onClick={handleEdit}>
+          <EditOutlined /> ویرایش
+        </Button>
+      }
     >
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ flex: 1, marginRight: "20px" }}>
@@ -112,7 +122,7 @@ export const CardBox: FC<CardProps> = ({
             <strong>ایمیل:</strong> {email}
           </p>
           <p>
-            <strong>تلفن:</strong> {phone || "N/A"}
+            <strong>تلفن:</strong> {`${phone} 98+ ` || "N/A"}
           </p>
           <p>
             <strong>دفتر:</strong> {office || "N/A"}

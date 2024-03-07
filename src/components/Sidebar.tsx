@@ -16,7 +16,7 @@ export const MenuItems = () => {
       >
         <Menu.Item key="/panel" icon={<UserOutlined />}>
           <Link to="/panel" />
-          اطلاعات اوستاد
+          اطلاعات استاد
         </Menu.Item>
         <Menu.Item key="2" icon={<VideoCameraOutlined />}>
           Option 2
