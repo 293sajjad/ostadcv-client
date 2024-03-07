@@ -97,12 +97,14 @@ export const CardBox: FC<CardProps> = ({
           </p>
           <p>
             <strong>تماس‌ها:</strong>{" "}
-            {Object.entries(Contacts).map(([key, value]) => (
-              <span key={key}>
-                <strong>{key}:</strong> {value}
-                <br />
-              </span>
-            ))}
+            {Contacts
+              ? Object.entries(Contacts).map(([key, value]) => (
+                  <span key={key}>
+                    <strong>{key}:</strong> {value}
+                    <br />
+                  </span>
+                ))
+              : "N/A"}
           </p>
         </div>
         <div style={{ flex: 1 }}>

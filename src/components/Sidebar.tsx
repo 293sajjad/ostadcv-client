@@ -4,17 +4,25 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 export const MenuItems = () => {
   return (
     <>
-      <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-        <Menu.Item key="1" icon={<UserOutlined />}>
-          Option 1
+      <Menu
+        theme="dark"
+        selectedKeys={[location.pathname]}
+        mode="inline"
+        style={{ fontFamily: "Rubik" }}
+      >
+        <Menu.Item key="/panel" icon={<UserOutlined />}>
+          <Link to="/panel" />
+          اطلاعات اوستاد
         </Menu.Item>
         <Menu.Item key="2" icon={<VideoCameraOutlined />}>
           Option 2
         </Menu.Item>
-        <Menu.Item key="3" icon={<UploadOutlined />}>
+        <Menu.Item key="/panel/setting" icon={<UploadOutlined />}>
+          <Link to="/panel/setting" />
           Option 3
         </Menu.Item>
       </Menu>

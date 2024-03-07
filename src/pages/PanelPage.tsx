@@ -8,6 +8,7 @@ import { CardBox } from "../components/PanelOverviewComponent";
 export const OverviewPanel = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [state, _setState] = useAtom(authInfo);
+  console.log(state);
 
   return (
     <>
