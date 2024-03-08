@@ -3,7 +3,9 @@ import Home from "./pages/HomePage";
 import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import { LoginOrRegister, PanelAuth } from "./Guard/Auth";
-import { OverviewPanel, SettingPanel } from "./pages/PanelPage";
+import Overview from "./pages/panel/OverviewPage";
+import Setting from "./pages/panel/SettingPage";
+import EditOverview from "./pages/panel/EditOverviewPage";
 
 function App() {
   return (
@@ -15,8 +17,9 @@ function App() {
           <Route path="register" Component={Register} />
         </Route>
         <Route path="/panel" element={<PanelAuth />}>
-          <Route path="" Component={OverviewPanel} />
-          <Route path="setting" Component={SettingPanel} />
+          <Route path="" Component={Overview} />
+          <Route path="setting" Component={Setting} />
+          <Route path="edit-overview" Component={EditOverview} />
         </Route>
       </Routes>
     </>

@@ -1,11 +1,9 @@
-import { Button } from "antd";
-import Panel from "../layouts/PanelLayout";
-import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
-import { authInfo } from "../utils/store";
-import { CardBox } from "../components/PanelOverviewComponent";
+import Panel from "../../layouts/PanelLayout";
+import { CardBox } from "../../components/PanelOverviewComponent";
+import { authInfo } from "../../utils/store";
 
-export const OverviewPanel = () => {
+const Overview = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [state, _setState] = useAtom(authInfo);
   console.log(state);
@@ -43,15 +41,4 @@ export const OverviewPanel = () => {
   );
 };
 
-export const SettingPanel = () => {
-  return (
-    <>
-      <Panel title="setting" description="صفحه ابتدایی ادمین پنل ostadcv">
-        <h1>this is Setting</h1>
-        <Button>
-          <Link to={"/panel"}>overview</Link>
-        </Button>
-      </Panel>
-    </>
-  );
-};
+export default Overview;
