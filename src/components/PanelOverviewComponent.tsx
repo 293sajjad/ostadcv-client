@@ -14,9 +14,6 @@ interface CardProps {
   updatedAt: string;
   name: string;
   family: string;
-  Contacts: {
-    [key: string]: string;
-  };
   googel_scolar: string | null;
   access: boolean;
   college: string | null;
@@ -37,7 +34,6 @@ export const CardBox: FC<CardProps> = ({
   website,
   science_ranking,
   college,
-  Contacts,
   googel_scolar,
   avatar,
 }) => {
@@ -102,17 +98,6 @@ export const CardBox: FC<CardProps> = ({
           </p>
           <p>
             <strong>گوگل اسکولار:</strong> {googel_scolar || "N/A"}
-          </p>
-          <p>
-            <strong>تماس‌ها:</strong>{" "}
-            {Contacts
-              ? Object.entries(Contacts).map(([key, value]) => (
-                  <span key={key}>
-                    <strong>{key}:</strong> {value}
-                    <br />
-                  </span>
-                ))
-              : "N/A"}
           </p>
         </div>
         <div style={{ flex: 1 }}>

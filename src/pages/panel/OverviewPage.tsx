@@ -6,7 +6,6 @@ import { authInfo } from "../../utils/store";
 const Overview = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [state, _setState] = useAtom(authInfo);
-  console.log(state);
 
   return (
     <>
@@ -25,7 +24,6 @@ const Overview = () => {
             updatedAt={state.authInfo.updatedAt}
             name={state.authInfo.name}
             family={state.authInfo.family}
-            Contacts={state.authInfo.Contacts}
             googel_scolar={state.authInfo.googel_scolar}
             access={state.authInfo.access}
             college={state.authInfo.college}
