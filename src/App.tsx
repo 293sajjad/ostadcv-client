@@ -6,6 +6,7 @@ import { LoginOrRegister, PanelAuth } from "./Guard/Auth";
 import Overview from "./pages/panel/OverviewPage";
 import Setting from "./pages/panel/SettingPage";
 import EditOverview from "./pages/panel/EditOverviewPage";
+import CvPanel from "./pages/panel/CvPanelPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="" Component={Overview} />
           <Route path="setting" Component={Setting} />
           <Route path="edit-overview" Component={EditOverview} />
+          <Route path="myCv" Component={CvPanel} />
         </Route>
       </Routes>
     </>

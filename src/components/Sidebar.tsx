@@ -1,9 +1,5 @@
 import { Menu } from "antd";
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, BookOutlined, SettingOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 export const MenuItems = () => {
   return (
@@ -18,12 +14,13 @@ export const MenuItems = () => {
           <Link to="/panel" />
           اطلاعات استاد
         </Menu.Item>
-        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-          Option 2
+        <Menu.Item key="/panel/myCv" icon={<BookOutlined />}>
+          <Link to="/panel/myCv" />
+          رزومه من
         </Menu.Item>
-        <Menu.Item key="/panel/setting" icon={<UploadOutlined />}>
+        <Menu.Item key="/panel/setting" icon={<SettingOutlined />}>
           <Link to="/panel/setting" />
-          Option 3
+          تنظیمات
         </Menu.Item>
       </Menu>
     </>
